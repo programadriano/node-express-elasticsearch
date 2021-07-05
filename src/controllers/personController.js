@@ -4,7 +4,6 @@ exports.get = (req, res, next) => {
     const searchText = req.query.text
 
     elasticClient.search({
-            index: 'person',
             body: {
                 query: {
                     wildcard: { "name": `*${searchText.trim()}*` }
@@ -13,6 +12,8 @@ exports.get = (req, res, next) => {
         })
         .then(response => {
             return res.json(response)
+        }).catch(err => {
+            return res.status(500).json({ "message": err })
         })
 
 };
@@ -30,6 +31,8 @@ exports.getById = (req, res, next) => {
         })
         .then(response => {
             return res.json(response)
+        }).catch(err => {
+            return res.status(500).json({ "message": err })
         })
 };
 
@@ -42,11 +45,10 @@ exports.post = (req, res, next) => {
                 "age": req.body.age,
             }
         })
-        .then(response => {
-            return res.json({ "message": "Indexing successful" })
-        })
-        .catch(err => {
-            return res.status(500).json({ "message": "Error" })
+        .then(() => {
+            return res.json({ "message": "Pessoar criada com sucesso!" })
+        }).catch(err => {
+            return res.status(500).json({ "message": err })
         })
 
 };
@@ -63,6 +65,8 @@ exports.put = (req, res, next) => {
         })
         .then(response => {
             return res.json(response)
+        }).catch(err => {
+            return res.status(500).json({ "message": err })
         })
 
 };
@@ -75,6 +79,8 @@ exports.delete = (req, res, next) => {
             id: id
         })
         .then(response => {
-            return res.json(response)
+            return res.json(response);
+        }).catch(err => {
+            return res.status(500).json({ "message": err })
         })
 };
