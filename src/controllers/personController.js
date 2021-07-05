@@ -22,7 +22,6 @@ exports.getById = (req, res, next) => {
     const id = req.params.id;
 
     elasticClient.search({
-            index: 'products',
             body: {
                 query: {
                     match: { "_id": id }
