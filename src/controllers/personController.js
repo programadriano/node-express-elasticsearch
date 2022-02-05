@@ -40,12 +40,12 @@ exports.post = (req, res, next) => {
             index: 'person',
             body: {
                 "name": req.body.name,
-                "email": req.body.mail,
+                "email": req.body.email,
                 "age": req.body.age,
             }
         })
         .then(() => {
-            return res.json({ "message": "Pessoar criada com sucesso!" })
+            return res.json({ "message": "Pessoa criada com sucesso!" })
         }).catch(err => {
             return res.status(500).json({ "message": err })
         })
